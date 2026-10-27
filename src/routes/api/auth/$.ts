@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import '@tanstack/react-start'
 
 import { auth } from '#/features/auth/server/auth'
 
