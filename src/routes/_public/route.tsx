@@ -1,5 +1,5 @@
 import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
-import { LayoutDashboard, UtensilsCrossed } from 'lucide-react'
+import { UtensilsCrossed } from 'lucide-react'
 
 import { Avatar, AvatarFallback } from '#/components/ui/avatar'
 import { currentUser, initials } from '#/lib/current-user'
@@ -24,10 +24,6 @@ function PublicLayout() {
             >
               <UtensilsCrossed className="size-4" />
               Restaurants
-            </Link>
-            <Link to="/dashboard" className="nav-link flex items-center gap-2">
-              <LayoutDashboard className="size-4" />
-              Dashboard
             </Link>
           </nav>
 

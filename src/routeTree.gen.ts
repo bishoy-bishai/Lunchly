@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
-import { Route as PublicDashboardRouteImport } from './routes/_public/dashboard'
 import { Route as KitchenAuthRouteRouteImport } from './routes/kitchen/_auth/route'
 import { Route as KitchenProtectedRouteRouteImport } from './routes/kitchen/_protected/route'
 import { Route as ParentAuthRouteRouteImport } from './routes/parent/_auth/route'
@@ -36,11 +35,6 @@ const PublicRouteRoute = PublicRouteRouteImport.update({
 const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => PublicRouteRoute,
-} as any)
-const PublicDashboardRoute = PublicDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
   getParentRoute: () => PublicRouteRoute,
 } as any)
 const KitchenAuthRouteRoute = KitchenAuthRouteRouteImport.update({
@@ -129,7 +123,6 @@ export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/kitchen': typeof KitchenProtectedRouteRouteWithChildren
   '/parent': typeof ParentProtectedRouteRouteWithChildren
-  '/dashboard': typeof PublicDashboardRoute
   '/restaurants/$id': typeof PublicRestaurantsIdRoute
   '/kitchen/login': typeof KitchenAuthLoginRoute
   '/kitchen/signup': typeof KitchenAuthSignupRoute
@@ -146,7 +139,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/kitchen': typeof KitchenProtectedIndexRoute
   '/parent': typeof ParentProtectedIndexRoute
-  '/dashboard': typeof PublicDashboardRoute
   '/': typeof PublicIndexRoute
   '/restaurants/$id': typeof PublicRestaurantsIdRoute
   '/kitchen/login': typeof KitchenAuthLoginRoute
@@ -166,7 +158,6 @@ export interface FileRoutesById {
   '/kitchen/_protected': typeof KitchenProtectedRouteRouteWithChildren
   '/parent/_auth': typeof ParentAuthRouteRouteWithChildren
   '/parent/_protected': typeof ParentProtectedRouteRouteWithChildren
-  '/_public/dashboard': typeof PublicDashboardRoute
   '/_public/': typeof PublicIndexRoute
   '/_public/restaurants/$id': typeof PublicRestaurantsIdRoute
   '/kitchen/_auth/login': typeof KitchenAuthLoginRoute
@@ -187,7 +178,6 @@ export interface FileRouteTypes {
     | '/'
     | '/kitchen'
     | '/parent'
-    | '/dashboard'
     | '/restaurants/$id'
     | '/kitchen/login'
     | '/kitchen/signup'
@@ -204,7 +194,6 @@ export interface FileRouteTypes {
   to:
     | '/kitchen'
     | '/parent'
-    | '/dashboard'
     | '/'
     | '/restaurants/$id'
     | '/kitchen/login'
@@ -223,7 +212,6 @@ export interface FileRouteTypes {
     | '/kitchen/_protected'
     | '/parent/_auth'
     | '/parent/_protected'
-    | '/_public/dashboard'
     | '/_public/'
     | '/_public/restaurants/$id'
     | '/kitchen/_auth/login'
@@ -261,13 +249,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof PublicIndexRouteImport
-      parentRoute: typeof PublicRouteRoute
-    }
-    '/_public/dashboard': {
-      id: '/_public/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof PublicDashboardRouteImport
       parentRoute: typeof PublicRouteRoute
     }
     '/kitchen/_auth': {
@@ -386,14 +367,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface PublicRouteRouteChildren {
-  PublicDashboardRoute: typeof PublicDashboardRoute
   PublicIndexRoute: typeof PublicIndexRoute
   PublicRestaurantsIdRoute: typeof PublicRestaurantsIdRoute
   PublicRestaurantsIndexRoute: typeof PublicRestaurantsIndexRoute
 }
 
 const PublicRouteRouteChildren: PublicRouteRouteChildren = {
-  PublicDashboardRoute: PublicDashboardRoute,
   PublicIndexRoute: PublicIndexRoute,
   PublicRestaurantsIdRoute: PublicRestaurantsIdRoute,
   PublicRestaurantsIndexRoute: PublicRestaurantsIndexRoute,

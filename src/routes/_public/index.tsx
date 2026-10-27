@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
-import { ArrowRight, LayoutDashboard, UtensilsCrossed } from 'lucide-react'
+import { ArrowRight, UtensilsCrossed } from 'lucide-react'
 
 import { Button } from '#/components/ui/button'
 import {
@@ -21,12 +21,6 @@ const shortcuts = [
     icon: UtensilsCrossed,
     title: 'Restaurants',
     description: 'Browse the places on the lunch rotation and add new ones.',
-  },
-  {
-    to: '/dashboard',
-    icon: LayoutDashboard,
-    title: 'Dashboard',
-    description: 'See recent picks, reservations and team activity.',
   },
 ] as const
 
