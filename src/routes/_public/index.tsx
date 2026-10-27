@@ -11,7 +11,7 @@ import {
 } from '#/components/ui/card'
 import { currentUser } from '#/lib/current-user'
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/_public/')({
   component: Home,
 })
 

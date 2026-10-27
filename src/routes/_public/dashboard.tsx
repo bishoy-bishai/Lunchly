@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '#/components/ui/card'
 
-export const Route = createFileRoute('/dashboard')({
+export const Route = createFileRoute('/_public/dashboard')({
   component: Dashboard,
 })
 

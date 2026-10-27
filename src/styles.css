@@ -26,6 +26,19 @@
   --link-bg-hover: rgba(255, 255, 255, 0.9);
   --hero-a: rgba(79, 184, 178, 0.36);
   --hero-b: rgba(47, 106, 74, 0.2);
+  --glow-base: rgba(79, 184, 178, 0.1);
+  --glow-a: rgba(79, 184, 178, 0.2);
+  --glow-b: rgba(47, 106, 74, 0.14);
+
+  /* Per-module design knobs. See the module skins below. */
+  --display-font: 'Fraunces', Georgia, serif;
+  --display-tracking: -0.01em;
+  --shell-radius: 18px;
+  --shell-shadow:
+    0 1px 0 var(--inset-glint) inset, 0 22px 44px rgba(30, 90, 72, 0.1),
+    0 6px 18px rgba(23, 58, 64, 0.08);
+  --shell-blur: 4px;
+  --kicker-tracking: 0.16em;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -82,6 +95,9 @@
   --link-bg-hover: rgba(24, 44, 49, 0.8);
   --hero-a: rgba(96, 215, 207, 0.18);
   --hero-b: rgba(110, 200, 154, 0.12);
+  --glow-base: rgba(96, 215, 207, 0.08);
+  --glow-a: rgba(96, 215, 207, 0.12);
+  --glow-b: rgba(110, 200, 154, 0.1);
 
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
@@ -117,8 +133,71 @@
   --sidebar-ring: oklch(0.442 0.017 285.786);
 }
 
+/* Module skins. `data-module` is set on <html> from the pathname (__root.tsx);
+ * each block only redefines tokens already declared in :root. */
+
+/* Parent: warm apricot, soft and rounded. */
+[data-module='parent'] {
+  --sea-ink: #40241c;
+  --sea-ink-soft: #8a6355;
+  --lagoon: #f0875c;
+  --lagoon-deep: #cf5b32;
+  --palm: #b8475f;
+  --sand: #fde9dc;
+  --foam: #fff8f3;
+  --line: rgba(64, 36, 28, 0.12);
+  --kicker: rgba(184, 71, 95, 0.9);
+  --bg-base: #fdeee4;
+  --header-bg: rgba(255, 248, 243, 0.86);
+  --chip-line: rgba(207, 91, 50, 0.2);
+  --hero-a: rgba(240, 135, 92, 0.3);
+  --hero-b: rgba(184, 71, 95, 0.16);
+  --glow-base: rgba(240, 135, 92, 0.1);
+  --glow-a: rgba(240, 135, 92, 0.18);
+  --glow-b: rgba(184, 71, 95, 0.12);
+  --shell-radius: 26px;
+  --radius: 1rem;
+  --primary: oklch(0.63 0.16 42);
+  --primary-foreground: oklch(0.99 0.01 60);
+  --accent: oklch(0.94 0.04 40);
+  --accent-foreground: oklch(0.34 0.07 35);
+  --ring: oklch(0.63 0.16 42);
+}
+
+/* Kitchen: an ops console — cool steel, amber signal, squared off. */
+[data-module='kitchen'] {
+  --sea-ink: #0e1a23;
+  --sea-ink-soft: #52687a;
+  --lagoon: #f5a524;
+  --lagoon-deep: #b87708;
+  --palm: #2563a8;
+  --sand: #dde4ea;
+  --foam: #f2f6f9;
+  --line: rgba(14, 26, 35, 0.16);
+  --kicker: rgba(37, 99, 168, 0.95);
+  --bg-base: #e6ecf1;
+  --header-bg: rgba(243, 247, 250, 0.9);
+  --chip-line: rgba(37, 99, 168, 0.22);
+  --hero-a: rgba(37, 99, 168, 0.18);
+  --hero-b: rgba(245, 165, 36, 0.14);
+  --glow-base: rgba(37, 99, 168, 0.07);
+  --glow-a: rgba(37, 99, 168, 0.12);
+  --glow-b: rgba(245, 165, 36, 0.1);
+  --display-font: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --shell-radius: 6px;
+  --shell-blur: 0px;
+  --kicker-tracking: 0.2em;
+  --radius: 0.3rem;
+  --primary: oklch(0.47 0.12 255);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.8 0.14 78);
+  --accent-foreground: oklch(0.25 0.05 70);
+  --ring: oklch(0.47 0.12 255);
+}
+
 @theme inline {
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--display-font);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -165,29 +244,32 @@ body,
 
 body {
   margin: 0;
+  background-color: var(--bg-base);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Painted by each module's layout, so the skin travels with the layout
+ * rather than with <body>. See src/routes/*/
+route.tsx. */ .app-shell {
+  min-height: 100%;
   color: var(--sea-ink);
   font-family: var(--font-sans);
   background-color: var(--bg-base);
   background:
     radial-gradient(1100px 620px at -8% -10%, var(--hero-a), transparent 58%),
     radial-gradient(1050px 620px at 112% -12%, var(--hero-b), transparent 62%),
-    radial-gradient(
-      720px 380px at 50% 115%,
-      rgba(79, 184, 178, 0.1),
-      transparent 68%
-    ),
+    radial-gradient(720px 380px at 50% 115%, var(--glow-base), transparent 68%),
     linear-gradient(
       180deg,
       color-mix(in oklab, var(--sand) 68%, white) 0%,
       var(--foam) 44%,
       var(--bg-base) 100%
     );
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-body::before {
+.app-shell::before {
   content: '';
   position: fixed;
   inset: 0;
@@ -200,15 +282,11 @@ body::before {
       rgba(255, 255, 255, 0.8),
       transparent 34%
     ),
-    radial-gradient(
-      circle at 78% 26%,
-      rgba(79, 184, 178, 0.2),
-      transparent 42%
-    ),
-    radial-gradient(circle at 42% 82%, rgba(47, 106, 74, 0.14), transparent 36%);
+    radial-gradient(circle at 78% 26%, var(--glow-a), transparent 42%),
+    radial-gradient(circle at 42% 82%, var(--glow-b), transparent 36%);
 }
 
-body::after {
+.app-shell::after {
   content: '';
   position: fixed;
   inset: 0;
@@ -263,17 +341,16 @@ pre code {
 }
 
 .display-title {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: var(--display-font);
+  letter-spacing: var(--display-tracking);
 }
 
 .island-shell {
   border: 1px solid var(--line);
+  border-radius: var(--shell-radius);
   background: linear-gradient(165deg, var(--surface-strong), var(--surface));
-  box-shadow:
-    0 1px 0 var(--inset-glint) inset,
-    0 22px 44px rgba(30, 90, 72, 0.1),
-    0 6px 18px rgba(23, 58, 64, 0.08);
-  backdrop-filter: blur(4px);
+  box-shadow: var(--shell-shadow);
+  backdrop-filter: blur(var(--shell-blur));
 }
 
 .feature-card {
@@ -304,7 +381,7 @@ a {
 }
 
 .island-kicker {
-  letter-spacing: 0.16em;
+  letter-spacing: var(--kicker-tracking);
   text-transform: uppercase;
   font-weight: 700;
   font-size: 0.69rem;
@@ -365,7 +442,6 @@ a {
     @apply border-border outline-ring/50;
   }
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--bg-base);
   }
 }

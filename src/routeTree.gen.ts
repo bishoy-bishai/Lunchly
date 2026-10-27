@@ -9,26 +9,43 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as PublicRouteRouteImport } from './routes/_public/route'
+import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicDashboardRouteImport } from './routes/_public/dashboard'
+import { Route as KitchenAuthRouteRouteImport } from './routes/kitchen/_auth/route'
 import { Route as KitchenProtectedRouteRouteImport } from './routes/kitchen/_protected/route'
-import { Route as RestaurantsIndexRouteImport } from './routes/restaurants/index'
-import { Route as RestaurantsIdRouteImport } from './routes/restaurants/$id'
+import { Route as ParentAuthRouteRouteImport } from './routes/parent/_auth/route'
+import { Route as ParentProtectedRouteRouteImport } from './routes/parent/_protected/route'
+import { Route as PublicRestaurantsIndexRouteImport } from './routes/_public/restaurants/index'
+import { Route as PublicRestaurantsIdRouteImport } from './routes/_public/restaurants/$id'
 import { Route as KitchenAuthLoginRouteImport } from './routes/kitchen/_auth/login'
 import { Route as KitchenAuthSignupRouteImport } from './routes/kitchen/_auth/signup'
 import { Route as KitchenProtectedIndexRouteImport } from './routes/kitchen/_protected/index'
+import { Route as KitchenProtectedOrdersRouteImport } from './routes/kitchen/_protected/orders'
 import { Route as ParentAuthLoginRouteImport } from './routes/parent/_auth/login'
 import { Route as ParentAuthSignupRouteImport } from './routes/parent/_auth/signup'
 import { Route as ParentProtectedIndexRouteImport } from './routes/parent/_protected/index'
+import { Route as ParentProtectedKidsRouteImport } from './routes/parent/_protected/kids'
+import { Route as ParentProtectedProfileRouteImport } from './routes/parent/_protected/profile'
+import { Route as ParentProtectedSubscriptionRouteImport } from './routes/parent/_protected/subscription'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const PublicRouteRoute = PublicRouteRouteImport.update({
+  id: '/_public',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRoute = DashboardRouteImport.update({
+const PublicIndexRoute = PublicIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PublicRouteRoute,
+} as any)
+const PublicDashboardRoute = PublicDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => PublicRouteRoute,
+} as any)
+const KitchenAuthRouteRoute = KitchenAuthRouteRouteImport.update({
+  id: '/kitchen/_auth',
+  path: '/kitchen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KitchenProtectedRouteRoute = KitchenProtectedRouteRouteImport.update({
@@ -36,83 +53,131 @@ const KitchenProtectedRouteRoute = KitchenProtectedRouteRouteImport.update({
   path: '/kitchen',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RestaurantsIndexRoute = RestaurantsIndexRouteImport.update({
+const ParentAuthRouteRoute = ParentAuthRouteRouteImport.update({
+  id: '/parent/_auth',
+  path: '/parent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentProtectedRouteRoute = ParentProtectedRouteRouteImport.update({
+  id: '/parent/_protected',
+  path: '/parent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicRestaurantsIndexRoute = PublicRestaurantsIndexRouteImport.update({
   id: '/restaurants/',
   path: '/restaurants/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => PublicRouteRoute,
 } as any)
-const RestaurantsIdRoute = RestaurantsIdRouteImport.update({
+const PublicRestaurantsIdRoute = PublicRestaurantsIdRouteImport.update({
   id: '/restaurants/$id',
   path: '/restaurants/$id',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => PublicRouteRoute,
 } as any)
 const KitchenAuthLoginRoute = KitchenAuthLoginRouteImport.update({
-  id: '/kitchen/_auth/login',
-  path: '/kitchen/login',
-  getParentRoute: () => rootRouteImport,
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => KitchenAuthRouteRoute,
 } as any)
 const KitchenAuthSignupRoute = KitchenAuthSignupRouteImport.update({
-  id: '/kitchen/_auth/signup',
-  path: '/kitchen/signup',
-  getParentRoute: () => rootRouteImport,
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => KitchenAuthRouteRoute,
 } as any)
 const KitchenProtectedIndexRoute = KitchenProtectedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => KitchenProtectedRouteRoute,
 } as any)
+const KitchenProtectedOrdersRoute = KitchenProtectedOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => KitchenProtectedRouteRoute,
+} as any)
 const ParentAuthLoginRoute = ParentAuthLoginRouteImport.update({
-  id: '/parent/_auth/login',
-  path: '/parent/login',
-  getParentRoute: () => rootRouteImport,
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => ParentAuthRouteRoute,
 } as any)
 const ParentAuthSignupRoute = ParentAuthSignupRouteImport.update({
-  id: '/parent/_auth/signup',
-  path: '/parent/signup',
-  getParentRoute: () => rootRouteImport,
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => ParentAuthRouteRoute,
 } as any)
 const ParentProtectedIndexRoute = ParentProtectedIndexRouteImport.update({
-  id: '/parent/_protected/',
-  path: '/parent/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ParentProtectedRouteRoute,
 } as any)
+const ParentProtectedKidsRoute = ParentProtectedKidsRouteImport.update({
+  id: '/kids',
+  path: '/kids',
+  getParentRoute: () => ParentProtectedRouteRoute,
+} as any)
+const ParentProtectedProfileRoute = ParentProtectedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ParentProtectedRouteRoute,
+} as any)
+const ParentProtectedSubscriptionRoute =
+  ParentProtectedSubscriptionRouteImport.update({
+    id: '/subscription',
+    path: '/subscription',
+    getParentRoute: () => ParentProtectedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/': typeof PublicIndexRoute
   '/kitchen': typeof KitchenProtectedRouteRouteWithChildren
-  '/restaurants/$id': typeof RestaurantsIdRoute
-  '/restaurants/': typeof RestaurantsIndexRoute
+  '/parent': typeof ParentProtectedRouteRouteWithChildren
+  '/dashboard': typeof PublicDashboardRoute
+  '/restaurants/$id': typeof PublicRestaurantsIdRoute
   '/kitchen/login': typeof KitchenAuthLoginRoute
   '/kitchen/signup': typeof KitchenAuthSignupRoute
+  '/kitchen/orders': typeof KitchenProtectedOrdersRoute
   '/parent/login': typeof ParentAuthLoginRoute
   '/parent/signup': typeof ParentAuthSignupRoute
+  '/parent/kids': typeof ParentProtectedKidsRoute
+  '/parent/profile': typeof ParentProtectedProfileRoute
+  '/parent/subscription': typeof ParentProtectedSubscriptionRoute
+  '/restaurants/': typeof PublicRestaurantsIndexRoute
   '/kitchen/': typeof KitchenProtectedIndexRoute
   '/parent/': typeof ParentProtectedIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
-  '/restaurants/$id': typeof RestaurantsIdRoute
-  '/restaurants': typeof RestaurantsIndexRoute
-  '/kitchen/login': typeof KitchenAuthLoginRoute
-  '/kitchen/signup': typeof KitchenAuthSignupRoute
-  '/parent/login': typeof ParentAuthLoginRoute
-  '/parent/signup': typeof ParentAuthSignupRoute
   '/kitchen': typeof KitchenProtectedIndexRoute
   '/parent': typeof ParentProtectedIndexRoute
+  '/dashboard': typeof PublicDashboardRoute
+  '/': typeof PublicIndexRoute
+  '/restaurants/$id': typeof PublicRestaurantsIdRoute
+  '/kitchen/login': typeof KitchenAuthLoginRoute
+  '/kitchen/signup': typeof KitchenAuthSignupRoute
+  '/kitchen/orders': typeof KitchenProtectedOrdersRoute
+  '/parent/login': typeof ParentAuthLoginRoute
+  '/parent/signup': typeof ParentAuthSignupRoute
+  '/parent/kids': typeof ParentProtectedKidsRoute
+  '/parent/profile': typeof ParentProtectedProfileRoute
+  '/parent/subscription': typeof ParentProtectedSubscriptionRoute
+  '/restaurants': typeof PublicRestaurantsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/_public': typeof PublicRouteRouteWithChildren
+  '/kitchen/_auth': typeof KitchenAuthRouteRouteWithChildren
   '/kitchen/_protected': typeof KitchenProtectedRouteRouteWithChildren
-  '/restaurants/$id': typeof RestaurantsIdRoute
-  '/restaurants/': typeof RestaurantsIndexRoute
+  '/parent/_auth': typeof ParentAuthRouteRouteWithChildren
+  '/parent/_protected': typeof ParentProtectedRouteRouteWithChildren
+  '/_public/dashboard': typeof PublicDashboardRoute
+  '/_public/': typeof PublicIndexRoute
+  '/_public/restaurants/$id': typeof PublicRestaurantsIdRoute
   '/kitchen/_auth/login': typeof KitchenAuthLoginRoute
   '/kitchen/_auth/signup': typeof KitchenAuthSignupRoute
+  '/kitchen/_protected/orders': typeof KitchenProtectedOrdersRoute
   '/parent/_auth/login': typeof ParentAuthLoginRoute
   '/parent/_auth/signup': typeof ParentAuthSignupRoute
+  '/parent/_protected/kids': typeof ParentProtectedKidsRoute
+  '/parent/_protected/profile': typeof ParentProtectedProfileRoute
+  '/parent/_protected/subscription': typeof ParentProtectedSubscriptionRoute
+  '/_public/restaurants/': typeof PublicRestaurantsIndexRoute
   '/kitchen/_protected/': typeof KitchenProtectedIndexRoute
   '/parent/_protected/': typeof ParentProtectedIndexRoute
 }
@@ -120,70 +185,96 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/dashboard'
     | '/kitchen'
+    | '/parent'
+    | '/dashboard'
     | '/restaurants/$id'
-    | '/restaurants/'
     | '/kitchen/login'
     | '/kitchen/signup'
+    | '/kitchen/orders'
     | '/parent/login'
     | '/parent/signup'
+    | '/parent/kids'
+    | '/parent/profile'
+    | '/parent/subscription'
+    | '/restaurants/'
     | '/kitchen/'
     | '/parent/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/dashboard'
-    | '/restaurants/$id'
-    | '/restaurants'
-    | '/kitchen/login'
-    | '/kitchen/signup'
-    | '/parent/login'
-    | '/parent/signup'
     | '/kitchen'
     | '/parent'
+    | '/dashboard'
+    | '/'
+    | '/restaurants/$id'
+    | '/kitchen/login'
+    | '/kitchen/signup'
+    | '/kitchen/orders'
+    | '/parent/login'
+    | '/parent/signup'
+    | '/parent/kids'
+    | '/parent/profile'
+    | '/parent/subscription'
+    | '/restaurants'
   id:
     | '__root__'
-    | '/'
-    | '/dashboard'
+    | '/_public'
+    | '/kitchen/_auth'
     | '/kitchen/_protected'
-    | '/restaurants/$id'
-    | '/restaurants/'
+    | '/parent/_auth'
+    | '/parent/_protected'
+    | '/_public/dashboard'
+    | '/_public/'
+    | '/_public/restaurants/$id'
     | '/kitchen/_auth/login'
     | '/kitchen/_auth/signup'
+    | '/kitchen/_protected/orders'
     | '/parent/_auth/login'
     | '/parent/_auth/signup'
+    | '/parent/_protected/kids'
+    | '/parent/_protected/profile'
+    | '/parent/_protected/subscription'
+    | '/_public/restaurants/'
     | '/kitchen/_protected/'
     | '/parent/_protected/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  DashboardRoute: typeof DashboardRoute
+  PublicRouteRoute: typeof PublicRouteRouteWithChildren
+  KitchenAuthRouteRoute: typeof KitchenAuthRouteRouteWithChildren
   KitchenProtectedRouteRoute: typeof KitchenProtectedRouteRouteWithChildren
-  RestaurantsIdRoute: typeof RestaurantsIdRoute
-  RestaurantsIndexRoute: typeof RestaurantsIndexRoute
-  KitchenAuthLoginRoute: typeof KitchenAuthLoginRoute
-  KitchenAuthSignupRoute: typeof KitchenAuthSignupRoute
-  ParentAuthLoginRoute: typeof ParentAuthLoginRoute
-  ParentAuthSignupRoute: typeof ParentAuthSignupRoute
-  ParentProtectedIndexRoute: typeof ParentProtectedIndexRoute
+  ParentAuthRouteRoute: typeof ParentAuthRouteRouteWithChildren
+  ParentProtectedRouteRoute: typeof ParentProtectedRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/_public': {
+      id: '/_public'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof PublicRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard': {
-      id: '/dashboard'
+    '/_public/': {
+      id: '/_public/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRouteRoute
+    }
+    '/_public/dashboard': {
+      id: '/_public/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
+      preLoaderRoute: typeof PublicDashboardRouteImport
+      parentRoute: typeof PublicRouteRoute
+    }
+    '/kitchen/_auth': {
+      id: '/kitchen/_auth'
+      path: '/kitchen'
+      fullPath: '/kitchen'
+      preLoaderRoute: typeof KitchenAuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kitchen/_protected': {
@@ -193,33 +284,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KitchenProtectedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/restaurants/': {
-      id: '/restaurants/'
-      path: '/restaurants'
-      fullPath: '/restaurants/'
-      preLoaderRoute: typeof RestaurantsIndexRouteImport
+    '/parent/_auth': {
+      id: '/parent/_auth'
+      path: '/parent'
+      fullPath: '/parent'
+      preLoaderRoute: typeof ParentAuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/restaurants/$id': {
-      id: '/restaurants/$id'
+    '/parent/_protected': {
+      id: '/parent/_protected'
+      path: '/parent'
+      fullPath: '/parent'
+      preLoaderRoute: typeof ParentProtectedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_public/restaurants/': {
+      id: '/_public/restaurants/'
+      path: '/restaurants'
+      fullPath: '/restaurants/'
+      preLoaderRoute: typeof PublicRestaurantsIndexRouteImport
+      parentRoute: typeof PublicRouteRoute
+    }
+    '/_public/restaurants/$id': {
+      id: '/_public/restaurants/$id'
       path: '/restaurants/$id'
       fullPath: '/restaurants/$id'
-      preLoaderRoute: typeof RestaurantsIdRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof PublicRestaurantsIdRouteImport
+      parentRoute: typeof PublicRouteRoute
     }
     '/kitchen/_auth/login': {
       id: '/kitchen/_auth/login'
-      path: '/kitchen/login'
+      path: '/login'
       fullPath: '/kitchen/login'
       preLoaderRoute: typeof KitchenAuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof KitchenAuthRouteRoute
     }
     '/kitchen/_auth/signup': {
       id: '/kitchen/_auth/signup'
-      path: '/kitchen/signup'
+      path: '/signup'
       fullPath: '/kitchen/signup'
       preLoaderRoute: typeof KitchenAuthSignupRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof KitchenAuthRouteRoute
     }
     '/kitchen/_protected/': {
       id: '/kitchen/_protected/'
@@ -228,35 +333,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KitchenProtectedIndexRouteImport
       parentRoute: typeof KitchenProtectedRouteRoute
     }
+    '/kitchen/_protected/orders': {
+      id: '/kitchen/_protected/orders'
+      path: '/orders'
+      fullPath: '/kitchen/orders'
+      preLoaderRoute: typeof KitchenProtectedOrdersRouteImport
+      parentRoute: typeof KitchenProtectedRouteRoute
+    }
     '/parent/_auth/login': {
       id: '/parent/_auth/login'
-      path: '/parent/login'
+      path: '/login'
       fullPath: '/parent/login'
       preLoaderRoute: typeof ParentAuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ParentAuthRouteRoute
     }
     '/parent/_auth/signup': {
       id: '/parent/_auth/signup'
-      path: '/parent/signup'
+      path: '/signup'
       fullPath: '/parent/signup'
       preLoaderRoute: typeof ParentAuthSignupRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ParentAuthRouteRoute
     }
     '/parent/_protected/': {
       id: '/parent/_protected/'
-      path: '/parent'
+      path: '/'
       fullPath: '/parent/'
       preLoaderRoute: typeof ParentProtectedIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ParentProtectedRouteRoute
+    }
+    '/parent/_protected/kids': {
+      id: '/parent/_protected/kids'
+      path: '/kids'
+      fullPath: '/parent/kids'
+      preLoaderRoute: typeof ParentProtectedKidsRouteImport
+      parentRoute: typeof ParentProtectedRouteRoute
+    }
+    '/parent/_protected/profile': {
+      id: '/parent/_protected/profile'
+      path: '/profile'
+      fullPath: '/parent/profile'
+      preLoaderRoute: typeof ParentProtectedProfileRouteImport
+      parentRoute: typeof ParentProtectedRouteRoute
+    }
+    '/parent/_protected/subscription': {
+      id: '/parent/_protected/subscription'
+      path: '/subscription'
+      fullPath: '/parent/subscription'
+      preLoaderRoute: typeof ParentProtectedSubscriptionRouteImport
+      parentRoute: typeof ParentProtectedRouteRoute
     }
   }
 }
 
+interface PublicRouteRouteChildren {
+  PublicDashboardRoute: typeof PublicDashboardRoute
+  PublicIndexRoute: typeof PublicIndexRoute
+  PublicRestaurantsIdRoute: typeof PublicRestaurantsIdRoute
+  PublicRestaurantsIndexRoute: typeof PublicRestaurantsIndexRoute
+}
+
+const PublicRouteRouteChildren: PublicRouteRouteChildren = {
+  PublicDashboardRoute: PublicDashboardRoute,
+  PublicIndexRoute: PublicIndexRoute,
+  PublicRestaurantsIdRoute: PublicRestaurantsIdRoute,
+  PublicRestaurantsIndexRoute: PublicRestaurantsIndexRoute,
+}
+
+const PublicRouteRouteWithChildren = PublicRouteRoute._addFileChildren(
+  PublicRouteRouteChildren,
+)
+
+interface KitchenAuthRouteRouteChildren {
+  KitchenAuthLoginRoute: typeof KitchenAuthLoginRoute
+  KitchenAuthSignupRoute: typeof KitchenAuthSignupRoute
+}
+
+const KitchenAuthRouteRouteChildren: KitchenAuthRouteRouteChildren = {
+  KitchenAuthLoginRoute: KitchenAuthLoginRoute,
+  KitchenAuthSignupRoute: KitchenAuthSignupRoute,
+}
+
+const KitchenAuthRouteRouteWithChildren =
+  KitchenAuthRouteRoute._addFileChildren(KitchenAuthRouteRouteChildren)
+
 interface KitchenProtectedRouteRouteChildren {
+  KitchenProtectedOrdersRoute: typeof KitchenProtectedOrdersRoute
   KitchenProtectedIndexRoute: typeof KitchenProtectedIndexRoute
 }
 
 const KitchenProtectedRouteRouteChildren: KitchenProtectedRouteRouteChildren = {
+  KitchenProtectedOrdersRoute: KitchenProtectedOrdersRoute,
   KitchenProtectedIndexRoute: KitchenProtectedIndexRoute,
 }
 
@@ -265,17 +431,43 @@ const KitchenProtectedRouteRouteWithChildren =
     KitchenProtectedRouteRouteChildren,
   )
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  DashboardRoute: DashboardRoute,
-  KitchenProtectedRouteRoute: KitchenProtectedRouteRouteWithChildren,
-  RestaurantsIdRoute: RestaurantsIdRoute,
-  RestaurantsIndexRoute: RestaurantsIndexRoute,
-  KitchenAuthLoginRoute: KitchenAuthLoginRoute,
-  KitchenAuthSignupRoute: KitchenAuthSignupRoute,
+interface ParentAuthRouteRouteChildren {
+  ParentAuthLoginRoute: typeof ParentAuthLoginRoute
+  ParentAuthSignupRoute: typeof ParentAuthSignupRoute
+}
+
+const ParentAuthRouteRouteChildren: ParentAuthRouteRouteChildren = {
   ParentAuthLoginRoute: ParentAuthLoginRoute,
   ParentAuthSignupRoute: ParentAuthSignupRoute,
+}
+
+const ParentAuthRouteRouteWithChildren = ParentAuthRouteRoute._addFileChildren(
+  ParentAuthRouteRouteChildren,
+)
+
+interface ParentProtectedRouteRouteChildren {
+  ParentProtectedKidsRoute: typeof ParentProtectedKidsRoute
+  ParentProtectedProfileRoute: typeof ParentProtectedProfileRoute
+  ParentProtectedSubscriptionRoute: typeof ParentProtectedSubscriptionRoute
+  ParentProtectedIndexRoute: typeof ParentProtectedIndexRoute
+}
+
+const ParentProtectedRouteRouteChildren: ParentProtectedRouteRouteChildren = {
+  ParentProtectedKidsRoute: ParentProtectedKidsRoute,
+  ParentProtectedProfileRoute: ParentProtectedProfileRoute,
+  ParentProtectedSubscriptionRoute: ParentProtectedSubscriptionRoute,
   ParentProtectedIndexRoute: ParentProtectedIndexRoute,
+}
+
+const ParentProtectedRouteRouteWithChildren =
+  ParentProtectedRouteRoute._addFileChildren(ParentProtectedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  PublicRouteRoute: PublicRouteRouteWithChildren,
+  KitchenAuthRouteRoute: KitchenAuthRouteRouteWithChildren,
+  KitchenProtectedRouteRoute: KitchenProtectedRouteRouteWithChildren,
+  ParentAuthRouteRoute: ParentAuthRouteRouteWithChildren,
+  ParentProtectedRouteRoute: ParentProtectedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
