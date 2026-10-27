@@ -17,6 +17,7 @@ import { Route as ParentAuthRouteRouteImport } from './routes/parent/_auth/route
 import { Route as ParentProtectedRouteRouteImport } from './routes/parent/_protected/route'
 import { Route as PublicRestaurantsIndexRouteImport } from './routes/_public/restaurants/index'
 import { Route as PublicRestaurantsIdRouteImport } from './routes/_public/restaurants/$id'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as KitchenAuthLoginRouteImport } from './routes/kitchen/_auth/login'
 import { Route as KitchenAuthSignupRouteImport } from './routes/kitchen/_auth/signup'
 import { Route as KitchenProtectedIndexRouteImport } from './routes/kitchen/_protected/index'
@@ -66,6 +67,11 @@ const PublicRestaurantsIdRoute = PublicRestaurantsIdRouteImport.update({
   id: '/restaurants/$id',
   path: '/restaurants/$id',
   getParentRoute: () => PublicRouteRoute,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const KitchenAuthLoginRoute = KitchenAuthLoginRouteImport.update({
   id: '/login',
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/kitchen': typeof KitchenProtectedRouteRouteWithChildren
   '/parent': typeof ParentProtectedRouteRouteWithChildren
   '/restaurants/$id': typeof PublicRestaurantsIdRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/kitchen/login': typeof KitchenAuthLoginRoute
   '/kitchen/signup': typeof KitchenAuthSignupRoute
   '/kitchen/orders': typeof KitchenProtectedOrdersRoute
@@ -141,6 +148,7 @@ export interface FileRoutesByTo {
   '/parent': typeof ParentProtectedIndexRoute
   '/': typeof PublicIndexRoute
   '/restaurants/$id': typeof PublicRestaurantsIdRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/kitchen/login': typeof KitchenAuthLoginRoute
   '/kitchen/signup': typeof KitchenAuthSignupRoute
   '/kitchen/orders': typeof KitchenProtectedOrdersRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/parent/_protected': typeof ParentProtectedRouteRouteWithChildren
   '/_public/': typeof PublicIndexRoute
   '/_public/restaurants/$id': typeof PublicRestaurantsIdRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/kitchen/_auth/login': typeof KitchenAuthLoginRoute
   '/kitchen/_auth/signup': typeof KitchenAuthSignupRoute
   '/kitchen/_protected/orders': typeof KitchenProtectedOrdersRoute
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/kitchen'
     | '/parent'
     | '/restaurants/$id'
+    | '/api/auth/$'
     | '/kitchen/login'
     | '/kitchen/signup'
     | '/kitchen/orders'
@@ -196,6 +206,7 @@ export interface FileRouteTypes {
     | '/parent'
     | '/'
     | '/restaurants/$id'
+    | '/api/auth/$'
     | '/kitchen/login'
     | '/kitchen/signup'
     | '/kitchen/orders'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '/parent/_protected'
     | '/_public/'
     | '/_public/restaurants/$id'
+    | '/api/auth/$'
     | '/kitchen/_auth/login'
     | '/kitchen/_auth/signup'
     | '/kitchen/_protected/orders'
@@ -233,6 +245,7 @@ export interface RootRouteChildren {
   KitchenProtectedRouteRoute: typeof KitchenProtectedRouteRouteWithChildren
   ParentAuthRouteRoute: typeof ParentAuthRouteRouteWithChildren
   ParentProtectedRouteRoute: typeof ParentProtectedRouteRouteWithChildren
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/restaurants/$id'
       preLoaderRoute: typeof PublicRestaurantsIdRouteImport
       parentRoute: typeof PublicRouteRoute
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/kitchen/_auth/login': {
       id: '/kitchen/_auth/login'
@@ -447,6 +467,7 @@ const rootRouteChildren: RootRouteChildren = {
   KitchenProtectedRouteRoute: KitchenProtectedRouteRouteWithChildren,
   ParentAuthRouteRoute: ParentAuthRouteRouteWithChildren,
   ParentProtectedRouteRoute: ParentProtectedRouteRouteWithChildren,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

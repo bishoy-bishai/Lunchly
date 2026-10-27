@@ -22,6 +22,13 @@
       "when": 1793128048500,
       "tag": "0002_dusty_sister_grimm",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1793137593069,
+      "tag": "0003_real_rumiko_fujikawa",
+      "breakpoints": true
     }
   ]
 }
