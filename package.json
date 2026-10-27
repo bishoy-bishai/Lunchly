@@ -21,7 +21,6 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@faker-js/faker": "^10.3.0",
     "@t3-oss/env-core": "^0.13.10",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/match-sorter-utils": "9.2.6",
@@ -37,9 +36,6 @@
     "better-sqlite3": "^12.6.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cn": "^0.5.0",
-    "dlx": "^0.2.1",
-    "drizzle-kit": "^0.31.9",
     "drizzle-orm": "^0.45.1",
     "lucide-react": "^0.577.0",
     "radix-ui": "^1.8.1",
@@ -51,6 +47,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "drizzle-kit": "^0.31.9",
+    "@faker-js/faker": "^10.3.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "0.8.5",
     "@tanstack/eslint-config": "0.4.0",
