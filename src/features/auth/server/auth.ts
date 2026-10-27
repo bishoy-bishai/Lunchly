@@ -1,5 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
+import { UserRoleEnum } from '../roles'
+import { tanstackStartCookies } from 'better-auth/tanstack-start'
 
 import { db } from '#/db'
 import * as schema from '#/db/schema.ts'
@@ -16,11 +18,18 @@ export const auth = betterAuth({
   user: {
     modelName: 'users',
     additionalFields: {
-      role: { type: 'string', input: false, defaultValue: 'parent' },
+      role: {
+        type: 'string',
+        input: false,
+        required: true,
+        validator: {
+          input: UserRoleEnum,
+        },
+      },
     },
   },
   session: { modelName: 'sessions' },
   account: { modelName: 'accounts' },
   verification: { modelName: 'verifications' },
-  plugins: [],
+  plugins: [tanstackStartCookies()],
 })
