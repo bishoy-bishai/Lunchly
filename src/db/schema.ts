@@ -1,5 +1,7 @@
 import { sql } from 'drizzle-orm'
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { check, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+
+import { DEFAULT_USER_ROLE, USER_ROLES } from '#/features/auth/roles'
 
 export const restaurants = sqliteTable('restaurants', {
   id: text().primaryKey(),
@@ -9,18 +11,33 @@ export const restaurants = sqliteTable('restaurants', {
     .default(sql`(current_timestamp)`),
 })
 
-export const users = sqliteTable('users', {
-  id: text().primaryKey(),
-  name: text().notNull(),
-  email: text().notNull().unique(),
-  emailVerified: integer('email_verified', { mode: 'boolean' })
-    .notNull()
-    .default(false),
-  image: text(),
-  role: text().notNull().default('guest'),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
-  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull(),
-})
+export const users = sqliteTable(
+  'users',
+  {
+    id: text().primaryKey(),
+    name: text().notNull(),
+    email: text().notNull().unique(),
+    emailVerified: integer('email_verified', { mode: 'boolean' })
+      .notNull()
+      .default(false),
+    image: text(),
+    role: text('role', { enum: USER_ROLES })
+      .notNull()
+      .default(DEFAULT_USER_ROLE),
+    createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull(),
+  },
+  (table) => [
+    // `enum` above is type-level only; this is what the database enforces.
+    // sql.raw: drizzle-kit renders bound params as `?` in migration files.
+    check(
+      'users_role_check',
+      sql`${table.role} in (${sql.raw(
+        USER_ROLES.map((role) => `'${role}'`).join(', '),
+      )})`,
+    ),
+  ],
+)
 
 export const sessions = sqliteTable('sessions', {
   id: text().primaryKey(),

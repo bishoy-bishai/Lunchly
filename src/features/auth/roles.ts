@@ -1,11 +1,9 @@
 import { z } from 'zod'
 
-export const UserRoleEnum = z.enum([
-  'parent',
-  'kitchen_owner',
-  'kitchen_staff',
-  'admin',
-  'guest',
-])
+export const USER_ROLES = ['parent', 'kitchen', 'guest'] as const
+
+export const UserRoleEnum = z.enum(USER_ROLES)
 
 export type UserRole = z.infer<typeof UserRoleEnum>
+
+export const DEFAULT_USER_ROLE: UserRole = 'guest'
