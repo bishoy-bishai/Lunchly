@@ -1,7 +1,10 @@
-import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core'
+import { sql } from 'drizzle-orm'
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
 export const restaurants = sqliteTable('restaurants', {
   id: text().primaryKey(),
   name: text().notNull(),
-  created_at: integer({ mode: 'timestamp' }).notNull().default(new Date()),
+  created_at: text('created_at')
+    .notNull()
+    .default(sql`(current_timestamp)`),
 })

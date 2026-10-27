@@ -15,6 +15,13 @@
       "when": 1793113921691,
       "tag": "0001_eager_reaper",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793128048500,
+      "tag": "0002_dusty_sister_grimm",
+      "breakpoints": true
     }
   ]
 }
