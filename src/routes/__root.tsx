@@ -7,6 +7,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
+import { SiteHeader } from '../components/site-header'
 
 import appCss from '../styles.css?url'
 
@@ -27,7 +28,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Lunchly',
       },
     ],
     links: [
@@ -47,7 +48,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <SiteHeader />
+        <main className="mx-auto w-full max-w-5xl px-4 py-8">{children}</main>
         <TanStackDevtools
           config={{
             position: 'bottom-right',

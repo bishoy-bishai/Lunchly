@@ -1,14 +1,66 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { ArrowRight, LayoutDashboard, UtensilsCrossed } from 'lucide-react'
 
-export const Route = createFileRoute('/')({ component: Home })
+import { Button } from '#/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '#/components/ui/card'
+import { currentUser } from '#/lib/current-user'
+
+export const Route = createFileRoute('/')({
+  component: Home,
+})
+
+const shortcuts = [
+  {
+    to: '/restaurants',
+    icon: UtensilsCrossed,
+    title: 'Restaurants',
+    description: 'Browse the places on the lunch rotation and add new ones.',
+  },
+  {
+    to: '/dashboard',
+    icon: LayoutDashboard,
+    title: 'Dashboard',
+    description: 'See recent picks, reservations and team activity.',
+  },
+] as const
 
 function Home() {
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Welcome to TanStack Start</h1>
-      <p className="mt-4 text-lg">
-        Edit <code>src/routes/index.tsx</code> to get started.
-      </p>
+    <div className="flex flex-col gap-8">
+      <section className="flex flex-col gap-2">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          Welcome back, {currentUser.name.split(' ')[0]}
+        </h1>
+        <p className="text-muted-foreground">
+          Pick a restaurant or check how lunch is going.
+        </p>
+      </section>
+
+      <section className="grid gap-4 sm:grid-cols-2">
+        {shortcuts.map(({ to, icon: Icon, title, description }) => (
+          <Card key={to}>
+            <CardHeader>
+              <Icon className="text-muted-foreground size-5" />
+              <CardTitle>{title}</CardTitle>
+              <CardDescription>{description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild variant="outline" size="sm">
+                <Link to={to}>
+                  Open {title}
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
     </div>
   )
 }
