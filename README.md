@@ -9,33 +9,36 @@ Parents subscribe to a restaurant and pick their children's meals for the week. 
 ## Features (MVP scope)
 
 **Parents**
+
 - Create an account and add children (name, age, allergies)
 - Save a delivery address
 - Subscribe to a restaurant
 - Choose a meal for each day of the week
 
 **Restaurants**
+
 - Add meals with ingredients and nutritional values
 - See the week's orders grouped by day and delivery address
 
 **Public**
+
 - Browse restaurants and their menus
 
 ## Tech stack
 
-| Area | Tool |
-|---|---|
-| Framework | [TanStack Start](https://tanstack.com/start) (React 19, SSR, server functions) |
-| Routing | TanStack Router (file-based, type-safe search params) |
-| Server state | TanStack Query |
-| Forms | TanStack Form |
-| Tables | TanStack Table |
-| Database | SQLite via better-sqlite3 |
-| ORM and migrations | Drizzle ORM and drizzle-kit |
-| Env validation | T3 Env and Zod |
-| UI | Tailwind CSS v4, shadcn/ui, lucide-react |
-| Auth (planned) | Better Auth |
-| Tooling | TypeScript (strict), ESLint, Prettier |
+| Area               | Tool                                                                           |
+| ------------------ | ------------------------------------------------------------------------------ |
+| Framework          | [TanStack Start](https://tanstack.com/start) (React 19, SSR, server functions) |
+| Routing            | TanStack Router (file-based, type-safe search params)                          |
+| Server state       | TanStack Query                                                                 |
+| Forms              | TanStack Form                                                                  |
+| Tables             | TanStack Table                                                                 |
+| Database           | SQLite via better-sqlite3                                                      |
+| ORM and migrations | Drizzle ORM and drizzle-kit                                                    |
+| Env validation     | T3 Env and Zod                                                                 |
+| UI                 | Tailwind CSS v4, shadcn/ui, lucide-react                                       |
+| Auth (planned)     | Better Auth                                                                    |
+| Tooling            | TypeScript (strict), ESLint, Prettier                                          |
 
 ## Getting started
 
@@ -64,29 +67,29 @@ The app runs at http://localhost:3000.
 
 ## Environment variables
 
-| Variable | Required | Description | Example |
-|---|---|---|---|
-| `DATABASE_URL` | Yes | Path to the SQLite database file | `./data/lunchly.db` |
-| `SERVER_URL` | No | Public URL of the server | `http://localhost:3000` |
-| `VITE_APP_TITLE` | No | App title exposed to the client | `Lunchly` |
+| Variable         | Required | Description                      | Example                 |
+| ---------------- | -------- | -------------------------------- | ----------------------- |
+| `DATABASE_URL`   | Yes      | Path to the SQLite database file | `./data/lunchly.db`     |
+| `SERVER_URL`     | No       | Public URL of the server         | `http://localhost:3000` |
+| `VITE_APP_TITLE` | No       | App title exposed to the client  | `Lunchly`               |
 
 Variables are validated at startup in `src/env.ts`. The app stops with a clear error if a required one is missing. Only variables prefixed with `VITE_` reach the browser.
 
 ## Scripts
 
-| Script | What it does |
-|---|---|
-| `yarn dev` | Start the dev server on port 3000 |
-| `yarn build` | Production build |
-| `yarn preview` | Preview the production build |
-| `yarn typecheck` | Type-check with `tsc --noEmit` |
-| `yarn lint` | Run ESLint |
-| `yarn format` | Format with Prettier and auto-fix ESLint issues |
-| `yarn check` | Check formatting without writing |
-| `yarn generate-routes` | Regenerate the route tree |
-| `yarn db:generate` | Generate a SQL migration from `src/db/schema.ts` |
-| `yarn db:migrate` | Apply pending migrations to the database |
-| `yarn db:studio` | Open Drizzle Studio to browse the database |
+| Script                 | What it does                                     |
+| ---------------------- | ------------------------------------------------ |
+| `yarn dev`             | Start the dev server on port 3000                |
+| `yarn build`           | Production build                                 |
+| `yarn preview`         | Preview the production build                     |
+| `yarn typecheck`       | Type-check with `tsc --noEmit`                   |
+| `yarn lint`            | Run ESLint                                       |
+| `yarn format`          | Format with Prettier and auto-fix ESLint issues  |
+| `yarn check`           | Check formatting without writing                 |
+| `yarn generate-routes` | Regenerate the route tree                        |
+| `yarn db:generate`     | Generate a SQL migration from `src/db/schema.ts` |
+| `yarn db:migrate`      | Apply pending migrations to the database         |
+| `yarn db:studio`       | Open Drizzle Studio to browse the database       |
 
 ## Database workflow
 

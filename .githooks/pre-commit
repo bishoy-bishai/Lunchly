@@ -1,0 +1,20 @@
+#!/bin/sh
+# Commit guard: the tree must lint, be formatted, and typecheck before a commit lands.
+# Installed by the `prepare` script (git config core.hooksPath .githooks).
+# Skip a single commit with `git commit --no-verify`.
+set -e
+
+run() {
+  printf '\033[2m→ %s\033[0m\n' "$1"
+  if ! yarn --silent run "$1"; then
+    printf '\033[31m✗ %s failed — commit aborted.\033[0m\n' "$1"
+    [ "$1" = check ] && printf '  Run `yarn format` to fix formatting.\n'
+    exit 1
+  fi
+}
+
+run typecheck
+run lint
+run check
+
+printf '\033[32m✓ commit guard passed\033[0m\n'
