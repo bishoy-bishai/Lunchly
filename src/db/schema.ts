@@ -17,7 +17,7 @@ export const users = sqliteTable('users', {
     .notNull()
     .default(false),
   image: text(),
-  role: text().notNull().default('parent'),
+  role: text().notNull().default('guest'),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
   updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull(),
 })
