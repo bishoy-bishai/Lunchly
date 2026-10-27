@@ -11,7 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as RestaurantsRouteImport } from './routes/restaurants'
+import { Route as RestaurantsIndexRouteImport } from './routes/restaurants/index'
+import { Route as RestaurantsIdRouteImport } from './routes/restaurants/$id'
+import { Route as KitchenauthLoginRouteImport } from './routes/kitchen/(auth)/login'
+import { Route as KitchenauthSignupRouteImport } from './routes/kitchen/(auth)/signup'
+import { Route as KitchenprotectedIndexRouteImport } from './routes/kitchen/(protected)/index'
+import { Route as ParentauthLoginRouteImport } from './routes/parent/(auth)/login'
+import { Route as ParentauthSignupRouteImport } from './routes/parent/(auth)/signup'
+import { Route as ParentprotectedIndexRouteImport } from './routes/parent/(protected)/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +30,134 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RestaurantsRoute = RestaurantsRouteImport.update({
-  id: '/restaurants',
-  path: '/restaurants',
+const RestaurantsIndexRoute = RestaurantsIndexRouteImport.update({
+  id: '/restaurants/',
+  path: '/restaurants/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RestaurantsIdRoute = RestaurantsIdRouteImport.update({
+  id: '/restaurants/$id',
+  path: '/restaurants/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KitchenauthLoginRoute = KitchenauthLoginRouteImport.update({
+  id: '/kitchen/(auth)/login',
+  path: '/kitchen/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KitchenauthSignupRoute = KitchenauthSignupRouteImport.update({
+  id: '/kitchen/(auth)/signup',
+  path: '/kitchen/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KitchenprotectedIndexRoute = KitchenprotectedIndexRouteImport.update({
+  id: '/kitchen/(protected)/',
+  path: '/kitchen/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentauthLoginRoute = ParentauthLoginRouteImport.update({
+  id: '/parent/(auth)/login',
+  path: '/parent/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentauthSignupRoute = ParentauthSignupRouteImport.update({
+  id: '/parent/(auth)/signup',
+  path: '/parent/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentprotectedIndexRoute = ParentprotectedIndexRouteImport.update({
+  id: '/parent/(protected)/',
+  path: '/parent/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/restaurants': typeof RestaurantsRoute
+  '/restaurants/$id': typeof RestaurantsIdRoute
+  '/restaurants/': typeof RestaurantsIndexRoute
+  '/kitchen/login': typeof KitchenauthLoginRoute
+  '/kitchen/signup': typeof KitchenauthSignupRoute
+  '/parent/login': typeof ParentauthLoginRoute
+  '/parent/signup': typeof ParentauthSignupRoute
+  '/kitchen/': typeof KitchenprotectedIndexRoute
+  '/parent/': typeof ParentprotectedIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/restaurants': typeof RestaurantsRoute
+  '/restaurants/$id': typeof RestaurantsIdRoute
+  '/restaurants': typeof RestaurantsIndexRoute
+  '/kitchen/login': typeof KitchenauthLoginRoute
+  '/kitchen/signup': typeof KitchenauthSignupRoute
+  '/parent/login': typeof ParentauthLoginRoute
+  '/parent/signup': typeof ParentauthSignupRoute
+  '/kitchen': typeof KitchenprotectedIndexRoute
+  '/parent': typeof ParentprotectedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/restaurants': typeof RestaurantsRoute
+  '/restaurants/$id': typeof RestaurantsIdRoute
+  '/restaurants/': typeof RestaurantsIndexRoute
+  '/kitchen/(auth)/login': typeof KitchenauthLoginRoute
+  '/kitchen/(auth)/signup': typeof KitchenauthSignupRoute
+  '/parent/(auth)/login': typeof ParentauthLoginRoute
+  '/parent/(auth)/signup': typeof ParentauthSignupRoute
+  '/kitchen/(protected)/': typeof KitchenprotectedIndexRoute
+  '/parent/(protected)/': typeof ParentprotectedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/restaurants'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/restaurants/$id'
+    | '/restaurants/'
+    | '/kitchen/login'
+    | '/kitchen/signup'
+    | '/parent/login'
+    | '/parent/signup'
+    | '/kitchen/'
+    | '/parent/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/restaurants'
-  id: '__root__' | '/' | '/dashboard' | '/restaurants'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/restaurants/$id'
+    | '/restaurants'
+    | '/kitchen/login'
+    | '/kitchen/signup'
+    | '/parent/login'
+    | '/parent/signup'
+    | '/kitchen'
+    | '/parent'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/restaurants/$id'
+    | '/restaurants/'
+    | '/kitchen/(auth)/login'
+    | '/kitchen/(auth)/signup'
+    | '/parent/(auth)/login'
+    | '/parent/(auth)/signup'
+    | '/kitchen/(protected)/'
+    | '/parent/(protected)/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
-  RestaurantsRoute: typeof RestaurantsRoute
+  RestaurantsIdRoute: typeof RestaurantsIdRoute
+  RestaurantsIndexRoute: typeof RestaurantsIndexRoute
+  KitchenauthLoginRoute: typeof KitchenauthLoginRoute
+  KitchenauthSignupRoute: typeof KitchenauthSignupRoute
+  ParentauthLoginRoute: typeof ParentauthLoginRoute
+  ParentauthSignupRoute: typeof ParentauthSignupRoute
+  KitchenprotectedIndexRoute: typeof KitchenprotectedIndexRoute
+  ParentprotectedIndexRoute: typeof ParentprotectedIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +176,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/restaurants': {
-      id: '/restaurants'
+    '/restaurants/': {
+      id: '/restaurants/'
       path: '/restaurants'
-      fullPath: '/restaurants'
-      preLoaderRoute: typeof RestaurantsRouteImport
+      fullPath: '/restaurants/'
+      preLoaderRoute: typeof RestaurantsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/restaurants/$id': {
+      id: '/restaurants/$id'
+      path: '/restaurants/$id'
+      fullPath: '/restaurants/$id'
+      preLoaderRoute: typeof RestaurantsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kitchen/(auth)/login': {
+      id: '/kitchen/(auth)/login'
+      path: '/kitchen/login'
+      fullPath: '/kitchen/login'
+      preLoaderRoute: typeof KitchenauthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kitchen/(auth)/signup': {
+      id: '/kitchen/(auth)/signup'
+      path: '/kitchen/signup'
+      fullPath: '/kitchen/signup'
+      preLoaderRoute: typeof KitchenauthSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kitchen/(protected)/': {
+      id: '/kitchen/(protected)/'
+      path: '/kitchen'
+      fullPath: '/kitchen/'
+      preLoaderRoute: typeof KitchenprotectedIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent/(auth)/login': {
+      id: '/parent/(auth)/login'
+      path: '/parent/login'
+      fullPath: '/parent/login'
+      preLoaderRoute: typeof ParentauthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent/(auth)/signup': {
+      id: '/parent/(auth)/signup'
+      path: '/parent/signup'
+      fullPath: '/parent/signup'
+      preLoaderRoute: typeof ParentauthSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent/(protected)/': {
+      id: '/parent/(protected)/'
+      path: '/parent'
+      fullPath: '/parent/'
+      preLoaderRoute: typeof ParentprotectedIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +238,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
-  RestaurantsRoute: RestaurantsRoute,
+  RestaurantsIdRoute: RestaurantsIdRoute,
+  RestaurantsIndexRoute: RestaurantsIndexRoute,
+  KitchenauthLoginRoute: KitchenauthLoginRoute,
+  KitchenauthSignupRoute: KitchenauthSignupRoute,
+  ParentauthLoginRoute: ParentauthLoginRoute,
+  ParentauthSignupRoute: ParentauthSignupRoute,
+  KitchenprotectedIndexRoute: KitchenprotectedIndexRoute,
+  ParentprotectedIndexRoute: ParentprotectedIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
