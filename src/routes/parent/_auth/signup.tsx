@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/kitchen/(auth)/login')({
+export const Route = createFileRoute('/parent/_auth/signup')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return <div>Hello "/kitchen/login"!</div>
+  return <div>Hello "/parent/(auth)/signup"!</div>
 }
