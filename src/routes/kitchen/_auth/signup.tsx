@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { Link, createFileRoute, useRouter } from '@tanstack/react-router'
-import { useForm } from '@tanstack/react-form'
 
-import { Button } from '#/components/ui/button'
 import { SignUpSchema } from '#/features/auth/sign-up-schema'
 import { signUpKitchen } from '#/features/auth/server/sign-up'
-import { FormInputField } from '#/components/form/form-input-field'
+import { useAppForm } from '#/components/form/app-form'
 
 export const Route = createFileRoute('/kitchen/_auth/signup')({
   component: KitchenSignUp,
@@ -15,7 +13,7 @@ function KitchenSignUp() {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: { name: '', email: '', password: '' },
     validators: { onSubmit: SignUpSchema },
     onSubmit: async ({ value }) => {
@@ -49,38 +47,38 @@ function KitchenSignUp() {
         </p>
       </div>
 
-      <FormInputField
-        form={form}
-        name="name"
-        label="Name"
-        autoComplete="name"
-      />
+      <form.AppField name="name">
+        {(field) => <field.FormInputField label="Name" autoComplete="name" />}
+      </form.AppField>
 
-      <FormInputField
-        form={form}
-        name="email"
-        label="Email"
-        type="email"
-        autoComplete="email"
-      />
+      <form.AppField name="email">
+        {(field) => (
+          <field.FormInputField
+            label="Email"
+            type="email"
+            autoComplete="email"
+          />
+        )}
+      </form.AppField>
 
-      <FormInputField
-        form={form}
-        name="password"
-        label="Password"
-        type="password"
-        autoComplete="new-password"
-      />
+      <form.AppField name="password">
+        {(field) => (
+          <field.FormInputField
+            label="Password"
+            type="password"
+            autoComplete="new-password"
+          />
+        )}
+      </form.AppField>
 
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
-      <form.Subscribe selector={(state) => state.isSubmitting}>
-        {(isSubmitting) => (
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Creating account…' : 'Create account'}
-          </Button>
-        )}
-      </form.Subscribe>
+      <form.AppForm>
+        <form.SubmitButton
+          label="Create account"
+          pendingLabel="Creating account…"
+        />
+      </form.AppForm>
 
       <p className="text-sm text-muted-foreground">
         Already have an account?{' '}

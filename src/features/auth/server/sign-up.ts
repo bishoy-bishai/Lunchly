@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 import { APIError } from 'better-auth/api'
 import { SignUpSchema } from '#/features/auth/sign-up-schema'
-import { signUpWithRole } from '#/features/auth/utils/sign-up-with-role'
+import { signUpWithRole } from '#/features/auth/server/sign-up-with-role'
 import { UserRoleEnum } from '#/features/auth/roles'
 
 export const signUpKitchen = createServerFn({ method: 'POST' })
