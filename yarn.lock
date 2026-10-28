@@ -149,7 +149,7 @@
     "@standard-schema/spec" "^1.1.0"
     zod "^4.5.4"
 
-"@better-auth/drizzle-adapter@1.7.14", "@better-auth/drizzle-adapter@^1.7.14":
+"@better-auth/drizzle-adapter@1.7.14":
   version "1.7.14"
   resolved "https://registry.yarnpkg.com/@better-auth/drizzle-adapter/-/drizzle-adapter-1.7.14.tgz#7a40ae985e800bd7af0a3fbdf7e61251ce62825f"
   integrity sha512-5RC8Ec5Ur15FWsS4As9/VrlRbB3+9EfShxIpA5A1FcD6IgPxFvzQNkAm2+FYx9LUSqx47NPf9hBTG2GUCMP9Ig==

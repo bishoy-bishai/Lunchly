@@ -2,7 +2,7 @@ import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { tanstackStartCookies } from 'better-auth/tanstack-start'
 
-import { DEFAULT_USER_ROLE, UserRoleEnum } from '../roles'
+import { DEFAULT_USER_ROLE, UserRoleEnum } from '#/features/auth/roles'
 
 import { db } from '#/db'
 import * as schema from '#/db/schema.ts'
@@ -22,6 +22,7 @@ export const auth = betterAuth({
       role: {
         type: 'string',
         required: true,
+        input: false,
         defaultValue: DEFAULT_USER_ROLE,
         validator: {
           input: UserRoleEnum,
