@@ -16,3 +16,16 @@ export const signUpKitchen = createServerFn({ method: 'POST' })
       throw error
     }
   })
+
+export const signUpParent = createServerFn({ method: 'POST' })
+  .validator(SignUpSchema)
+  .handler(async ({ data }) => {
+    try {
+      return await signUpWithRole(data, UserRoleEnum.enum.parent)
+    } catch (error) {
+      if (error instanceof APIError) {
+        throw new Error(error.body?.message ?? 'Could not create the account')
+      }
+      throw error
+    }
+  })
