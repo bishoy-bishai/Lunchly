@@ -16,6 +16,7 @@ export const auth = betterAuth({
     schema,
   }),
   emailAndPassword: { enabled: true },
+  disabledPaths: ['/sign-up/email'],
   user: {
     modelName: 'users',
     additionalFields: {
