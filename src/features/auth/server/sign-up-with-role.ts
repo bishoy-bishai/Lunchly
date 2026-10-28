@@ -1,4 +1,4 @@
-import type { SignUpInput } from '#/features/auth/sign-up-schema'
+import type { SignUpData } from '#/features/auth/sign-up-schema'
 import type { UserRole } from '#/features/auth/roles'
 import { auth } from '#/features/auth/server/auth'
 import { getRequest } from '@tanstack/react-start/server'
@@ -11,7 +11,7 @@ import { eq } from 'drizzle-orm'
  * client. Signing up for a given role goes through a server function that
  * assigns the role itself.
  */
-export async function signUpWithRole(input: SignUpInput, role: UserRole) {
+export async function signUpWithRole(input: SignUpData, role: UserRole) {
   const { user } = await auth.api.signUpEmail({
     body: input,
     headers: getRequest().headers,

@@ -1,32 +1,30 @@
 import { useAppForm } from '#/components/form/app-form'
-import type { SignUpSchema } from '../sign-up-schema'
-import { Link } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import { SignUpSchema } from '#/features/auth/sign-up-schema'
+import type { SignUpData } from '#/features/auth/sign-up-schema'
 
 interface SignUpFormValues {
-  signupSchema: typeof SignUpSchema
-  action: (data: any) => Promise<void>
-  setError: (error: string | undefined) => void
+  title: string
+  description: string
+  signUp: (data: SignUpData) => Promise<void>
+  loginTo: string
   errorMessage?: string
-  loginLink: string
-  onError: (error: unknown) => void
 }
 export function SignUpForm({
-  signupSchema,
-  action,
-  setError,
+  title,
+  description,
+  signUp,
+  loginTo,
   errorMessage,
-  loginLink,
-  onError,
 }: SignUpFormValues) {
   const form = useAppForm({
     defaultValues: { name: '', email: '', password: '' },
-    validators: { onSubmit: signupSchema },
+    validators: { onSubmit: SignUpSchema },
     onSubmit: async ({ value }) => {
-      setError(undefined)
       try {
-        await action(value)
+        await signUp(value)
       } catch (cause) {
-        onError(cause)
+        console.error(cause)
       }
     },
   })
@@ -40,10 +38,8 @@ export function SignUpForm({
       }}
     >
       <div className="space-y-1">
-        <h1 className="display-title text-2xl">Create a kitchen account</h1>
-        <p className="text-sm text-muted-foreground">
-          For staff who prepare and dispatch the day&apos;s orders.
-        </p>
+        <h1 className="display-title text-2xl">{title}</h1>
+        <p className="text-sm text-muted-foreground">{description}</p>
       </div>
 
       <form.AppField name="name">
@@ -83,7 +79,7 @@ export function SignUpForm({
 
       <p className="text-sm text-muted-foreground">
         Already have an account?{' '}
-        <Link to={loginLink} className="underline underline-offset-4">
+        <Link to={loginTo} className="underline underline-offset-4">
           Log in
         </Link>
       </p>

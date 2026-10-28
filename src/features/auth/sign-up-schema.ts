@@ -6,4 +6,4 @@ export const SignUpSchema = z.object({
   password: z.string().min(8, 'Use at least 8 characters'),
 })
 
-export type SignUpInput = z.infer<typeof SignUpSchema>
+export type SignUpData = z.infer<typeof SignUpSchema>
